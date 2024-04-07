@@ -1,4 +1,5 @@
 from english_words import get_english_words_set
+from colorama import Back, Style
 
 
 def choose_word() -> str:
@@ -38,5 +39,22 @@ def evaluate_guess(guess: str, answer: str) -> list[str]:
     return out
 
 
+def print_evaluation(guess: str, evaluation: list[str]) -> None:
+    """
+    print the guess again but coloured
+    :param guess: the guess
+    :param evaluation: result of evaluate_guess
+    """
+    for i, c in enumerate(guess):
+        if evaluation[i] == 'yellow':
+            print(Back.YELLOW + c + Style.RESET_ALL, end='')
+        elif evaluation[i] == 'green':
+            print(Back.GREEN + c + Style.RESET_ALL, end='')
+        else:
+            print(c + Style.RESET_ALL, end='')
+    print()
+
+
 if __name__ == '__main__':
-    print(evaluate_guess('keeps', 'abbey'))
+    e = evaluate_guess('babes', 'abbey')
+    print_evaluation('babes', e)
