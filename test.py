@@ -1,10 +1,14 @@
 import unittest
-from english_words import get_english_words_set
+import main
 
 
 class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        ...
+    def test_evaluate_guess(self):
+        """
+        try a few edge-casey cases
+        """
+        self.assertEqual(main.evaluate_guess('keeps', 'abbey'), ['grey', 'yellow', 'grey', 'grey',
+                                                                 'grey'])  # to check for repeating letters
 
 
 if __name__ == '__main__':
