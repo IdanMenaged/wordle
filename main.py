@@ -2,8 +2,10 @@ from english_words import get_english_words_set
 from colorama import Back, Style
 
 
+words = get_english_words_set(['gcide', 'web2'], alpha=True, lower=True)
+
+
 def choose_word() -> str:
-    words = get_english_words_set(['gcide', 'web2'], alpha=True, lower=True)
     word = words.pop()
     words.add(word)
     return word
@@ -53,6 +55,16 @@ def print_evaluation(guess: str, evaluation: list[str]) -> None:
         else:
             print(c + Style.RESET_ALL, end='')
     print()
+
+
+def legal_guess(guess: str, answer: str):
+    """
+    a legal guess is one that is the right length and is a real word
+    :param guess: the guess
+    :param answer: the right answer
+    :return: true if guess is legal
+    """
+    return len(guess) == len(answer) and guess in words
 
 
 if __name__ == '__main__':
