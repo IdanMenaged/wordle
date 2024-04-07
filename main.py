@@ -57,16 +57,46 @@ def print_evaluation(guess: str, evaluation: list[str]) -> None:
     print()
 
 
-def legal_guess(guess: str, answer: str):
+def legal_guess(guess: str, answer: str) -> bool:
     """
-    a legal guess is one that is the right length and is a real word
+    a legal guess is one that is the right length and is a real word and is lower case
     :param guess: the guess
     :param answer: the right answer
     :return: true if guess is legal
     """
-    return len(guess) == len(answer) and guess in words
+    return len(guess) == len(answer) and guess in words and guess.islower()
+
+
+def game() -> None:
+    """
+    the main function to run the game
+    """
+    while True:
+        print('starting new game...')
+        won = False
+        count = 0
+
+        word = choose_word()
+        print(f'the chosen word is {len(word)} characters long')
+
+        while not won:
+            guess = input('enter a guess: ')
+
+            if guess == 'give up':
+                print(f'the answer was: {word}')
+                break
+
+            if not legal_guess(guess, word):
+                print(f'guess must be {len(word)} characters long and a real english word (some words are not in the '
+                      f'games dictionary) and lower case')
+            else:
+                count += 1
+                evaluation = evaluate_guess(guess, word)
+                print_evaluation(guess, evaluation)
+                if evaluation == ['green' for _ in range(len(word))]:
+                    print(f'you win! and it only took you {count} tries')
+                    won = True
 
 
 if __name__ == '__main__':
-    e = evaluate_guess('babes', 'abbey')
-    print_evaluation('babes', e)
+    game()

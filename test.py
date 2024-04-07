@@ -14,6 +14,7 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(main.legal_guess('slangy', 'rabbit'))
         self.assertFalse(main.legal_guess('banana', 'abbey'))  # too long
         self.assertFalse(main.legal_guess('aaaaa', 'abbey'))  # gibberish
+        self.assertFalse(main.legal_guess('ABBEY', 'abbey'))  # upper case
 
 
 if __name__ == '__main__':
